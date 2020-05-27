@@ -17,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+
 app.post("/post", async (req, res) => {
   try {
     const { post } = req.body;

@@ -1,16 +1,21 @@
 const app = require("./index.js");
 const request = require("supertest");
+const pool = require("./test_db");
 
 // app.listen(5001, () => {
 //   console.log("test listening to 5001");
 // });
 
 beforeAll(() => {
+  console.log(pool);
   process.env.NODE_ENV = "test";
+  pool.query(
+    "INSERT INTO Posts (Post, UserName) VALUES ('test post', 'user123');"
+  );
 });
 
-afterEach(() => {
-  res = await pool.query("TRUNCATE TABLE Posts")
+afterAll(() => {
+  pool.query("TRUNCATE TABLE Posts;");
 });
 
 describe("POST /post", () => {
