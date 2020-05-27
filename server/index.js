@@ -1,6 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-const pool = require("./db");
+const port = process.env.NODE_ENV === "test" ? 5001 : 5000;
+let pool;
+
+if (process.env.NODE_ENV === "test") {
+  pool = require("./test_db");
+} else {
+  pool = require("./db");
+}
+// const pool = require("./test_db");
 
 const app = express();
 
@@ -23,6 +31,8 @@ app.post("/post", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("server has started on port 5000");
+app.listen(port, () => {
+  console.log(`Port is listening to ${port}`);
 });
+
+module.exports = app;
