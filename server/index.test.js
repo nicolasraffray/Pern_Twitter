@@ -25,6 +25,8 @@ describe("POST /post", () => {
       .send({ username: "usertest", post: "test post" })
       .then((response) => {
         expect(response.statusCode).toBe(200);
+        console.log(response.body[0]);
+        expect(response.body[0].post).toEqual("test post");
       });
   });
 });
