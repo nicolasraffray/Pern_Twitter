@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import App from "./App";
-import Login from "./components/Login/Login";
+import Login from "./components/Auth/Login/Login";
 
 describe("App", () => {
   it("should render a <div />", () => {

@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Login from "./Login";
+import Post from "./Post";
 
-describe("Login", () => {
+describe("Post", () => {
   it("should render a <div />", () => {
-    const wrapper = shallow(<Login />);
+    const wrapper = shallow(<Post />);
     expect(wrapper.find("div").length).toEqual(1);
   });
 });
