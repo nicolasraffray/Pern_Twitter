@@ -17,12 +17,33 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get("/post", async (req, res) => {
+  try {
+    const allPosts = await pool.query("SELECT * FROM Posts;");
+    res.json(allPosts.rows);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+app.get("/post/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await pool.query("SELECT * FROM Posts WHERE PostID = $1;", [
+      id,
+    ]);
+    console.log("POST ROWS IN INDEX.JS", post.rows);
+    res.json(post.rows);
+  } catch (err) {
+    console.err(err);
+  }
+});
+
 app.post("/post", async (req, res) => {
   try {
     let arr = [];
     arr.push(req.body.post);
     arr.push(req.body.username);
-    console.log(arr);
     const newPost = await pool.query(
       "INSERT INTO Posts (Post, UserName) VALUES($1,$2) RETURNING *",
       arr
