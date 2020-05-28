@@ -82,6 +82,7 @@ describe("DELETE /post/:id", () => {
     let id = await request(app)
       .get("/post")
       .then((response) => {
+        console.log(response.body[0]);
         return response.body[0].postid;
       });
     await request(app)
@@ -89,6 +90,16 @@ describe("DELETE /post/:id", () => {
       .then((response) => {
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual("post was deleted");
+      });
+    await request(app)
+      .get(`/post/${id}`)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body).not.toContain({
+          postid: id,
+          username: "usertest",
+          post: "test post",
+        });
       });
   });
 });
