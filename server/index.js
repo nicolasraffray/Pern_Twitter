@@ -32,11 +32,22 @@ app.get("/post/:id", async (req, res) => {
     const post = await pool.query("SELECT * FROM Posts WHERE PostID = $1;", [
       id,
     ]);
-    console.log("POST ROWS IN INDEX.JS", post.rows);
     res.json(post.rows);
   } catch (err) {
     console.err(err);
   }
+});
+
+app.put("/post/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { post } = req.body;
+    const updatePost = await pool.query(
+      `UPDATE Posts SET post = $1 WHERE PostID=$2`,
+      [post, id]
+    );
+    res.json("post was updated");
+  } catch (err) {}
 });
 
 app.post("/post", async (req, res) => {
@@ -48,7 +59,6 @@ app.post("/post", async (req, res) => {
       "INSERT INTO Posts (Post, UserName) VALUES($1,$2) RETURNING *",
       arr
     );
-    console.log(newPost.rows);
     res.json(newPost.rows);
   } catch (err) {
     console.error(err.message);

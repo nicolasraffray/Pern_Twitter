@@ -52,3 +52,27 @@ describe("Get /post/:id", () => {
       });
   });
 });
+
+describe("PUT /post/:id", () => {
+  it("can update a specific post", async () => {
+    let id = await request(app)
+      .get("/post")
+      .then((response) => {
+        return response.body[0].postid;
+      });
+    const put = await request(app)
+      .put(`/post/${id}`)
+      .send({ post: "new test tweet" })
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual("post was updated");
+      });
+
+    const get = await request(app)
+      .get(`/post/${id}`)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body[0].post).toEqual("new test tweet");
+      });
+  });
+});
