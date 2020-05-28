@@ -65,6 +65,18 @@ app.post("/post", async (req, res) => {
   }
 });
 
+app.delete("/post/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletePost = await pool.query("DELETE FROM Posts WHERE PostID = $1", [
+      id,
+    ]);
+    res.json("post was deleted");
+  } catch (err) {
+    console.err(err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Port is listening to ${port}`);
 });

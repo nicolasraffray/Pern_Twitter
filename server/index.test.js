@@ -76,3 +76,19 @@ describe("PUT /post/:id", () => {
       });
   });
 });
+
+describe("DELETE /post/:id", () => {
+  it("can delete a specific post", async () => {
+    let id = await request(app)
+      .get("/post")
+      .then((response) => {
+        return response.body[0].postid;
+      });
+    await request(app)
+      .delete(`/post/${id}`)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual("post was deleted");
+      });
+  });
+});
