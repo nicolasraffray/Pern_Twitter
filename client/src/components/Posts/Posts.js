@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Post from "./Post/Post";
+import classes from "./Post/Post.module.css";
+import Modal from "../UI/Modal/Modal";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -24,9 +26,13 @@ const Posts = () => {
       {posts.map((post) => {
         console.log(post);
         return (
-          <div>
-            <Post post={post} key={post.postid} />
-            <br></br>
+          <div className={classes.PostContainer} key={post.postid}>
+            <div className="card-header">Username</div>
+            <div className="card-body">{post.post}</div>
+            <div className="card-footer">
+              <button className="btn btn-danger">Delete</button>
+              <Modal post={post} key={post.postid} />
+            </div>
           </div>
         );
       })}
