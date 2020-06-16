@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import classes from "./AddPost.module.css";
 
 const InputTodo = () => {
   const [post, setDescription] = useState("");
@@ -20,15 +21,14 @@ const InputTodo = () => {
   };
   return (
     <Fragment>
-      <h1 className="text-center mt-5">Add Tweet Below</h1>
-      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
+      <h1 className="text-center mt-5">Welcome to Twitter Cloned !</h1>
+      <form className={classes.AddPost} onSubmit={onSubmitForm}>
         <input
           type="text"
-          className="form-control"
           value={post}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button className="btn btn-success"> Add </button>
+        <button className="btn btn-success"> Tweet </button>
       </form>
     </Fragment>
   );
