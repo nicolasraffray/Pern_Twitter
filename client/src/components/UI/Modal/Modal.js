@@ -7,10 +7,11 @@ const Modal = ({ post }) => {
     e.preventDefault();
     console.log("in update description", e);
     try {
-      console.log("working");
-      const body = { description };
+      console.log(description);
+      const body = { post: description };
+
       const response = await fetch(
-        `http://localhost:5000/todos/${post.postid}`,
+        `http://localhost:5000/post/${post.postid}`,
         {
           method: "PUT",
           headers: {
@@ -33,17 +34,22 @@ const Modal = ({ post }) => {
         data-toggle="modal"
         data-target={`#id${post.postid}`}
       >
+        {console.log(post.postid)}
         Edit
       </button>
 
-      <div class="modal" id={`id${post.id}`} onClick={() => setPost(post.post)}>
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Edit</h4>
+      <div
+        className="modal"
+        id={`id${post.postid}`}
+        onClick={() => setPost(post.post)}
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title">Edit</h4>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 onClick={() => setPost(post.post)}
               >
@@ -51,7 +57,7 @@ const Modal = ({ post }) => {
               </button>
             </div>
 
-            <div class="modal-body">
+            <div className="modal-body">
               <input
                 type="text"
                 className={"form-control"}
@@ -60,10 +66,10 @@ const Modal = ({ post }) => {
               />
             </div>
 
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-warning"
+                className="btn btn-warning"
                 data-dismiss="modal"
                 onClick={(e) => updateDescription(e)}
               >
@@ -71,7 +77,7 @@ const Modal = ({ post }) => {
               </button>
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 data-dismiss="modal"
                 onClick={() => setPost(post.post)}
               >
