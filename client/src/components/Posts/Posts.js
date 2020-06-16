@@ -16,6 +16,18 @@ const Posts = () => {
     }
   };
 
+  const deletePost = async (id) => {
+    try {
+      console.log(id);
+      const deletePost = await fetch(`http://localhost:5000/post/${id}`, {
+        method: "DELETE",
+      });
+      setPosts(posts.filter((post) => post.postid !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   useEffect(() => {
     getPosts();
   }, []);
@@ -23,14 +35,18 @@ const Posts = () => {
   return (
     <Fragment>
       {" "}
-      {posts.map((post) => {
-        console.log(post);
+      {posts.reverse().map((post) => {
         return (
           <div className={classes.PostContainer} key={post.postid}>
             <div className="card-header">Username</div>
             <div className="card-body">{post.post}</div>
             <div className="card-footer">
-              <button className="btn btn-danger">Delete</button>
+              <button
+                className="btn btn-danger"
+                onClick={() => deletePost(post.postid)}
+              >
+                Delete
+              </button>
               <Modal post={post} key={post.postid} />
             </div>
           </div>

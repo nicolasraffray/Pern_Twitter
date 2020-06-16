@@ -5,6 +5,7 @@ const Modal = ({ post }) => {
 
   const updateDescription = async (e) => {
     e.preventDefault();
+    console.log("in update description", e);
     try {
       console.log("working");
       const body = { description };
