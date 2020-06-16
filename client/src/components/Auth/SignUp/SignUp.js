@@ -22,7 +22,7 @@ const SignUp = () => {
           type="password"
           placeholder="Password"
         ></input>
-        <Link to="/">
+        <Link to="/tweets">
           <button className="btn btn-success">Sign Up!</button>
         </Link>
       </form>

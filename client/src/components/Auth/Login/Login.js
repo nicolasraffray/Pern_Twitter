@@ -7,7 +7,7 @@ const Login = () => {
     <div className={classes.Login}>
       <form className="d-flex mt-5">
         <input type="text" value=""></input>
-        <Link to="/">
+        <Link to="/tweets">
           <button className="btn btn-success">Login</button>
         </Link>
       </form>
