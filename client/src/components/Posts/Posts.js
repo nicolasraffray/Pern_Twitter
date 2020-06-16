@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Post from "./Post/Post";
+import AddPost from "../Posts/AddPost/AddPost";
 import classes from "./Post/Post.module.css";
 import Modal from "../UI/Modal/Modal";
 
@@ -35,6 +36,7 @@ const Posts = () => {
   return (
     <Fragment>
       {" "}
+      <AddPost />
       {posts.reverse().map((post) => {
         return (
           <div className={classes.PostContainer} key={post.postid}>
