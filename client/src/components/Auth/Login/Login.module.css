@@ -1,5 +1,14 @@
 .Login {
-  position: absolute;
-  margin-left: 40%;
-  margin-right: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Child {
+  margin: 5px;
+}
+
+.Login form {
+  flex-direction: column;
+  margin: 5px;
 }

@@ -6,7 +6,18 @@ const Login = () => {
   return (
     <div className={classes.Login}>
       <form className="d-flex mt-5">
-        <input type="text" value=""></input>
+        <input
+          type="text"
+          className={classes.Child}
+          placeholder="Username"
+          value=""
+        ></input>
+        <input
+          type="passwords"
+          className={classes.Child}
+          placeholder="Password"
+          value=""
+        ></input>
         <Link to="/tweets">
           <button className="btn btn-success">Login</button>
         </Link>
