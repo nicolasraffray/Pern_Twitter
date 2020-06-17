@@ -14,7 +14,7 @@ const InputTodo = () => {
         body: JSON.stringify(body),
       });
 
-      window.location = "/";
+      window.location = "/tweets";
     } catch (err) {
       console.error(err.message);
     }

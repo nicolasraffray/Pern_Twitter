@@ -20,7 +20,7 @@ const Modal = ({ post }) => {
           body: JSON.stringify(body),
         }
       );
-      window.location = "/";
+      window.location = "/tweets";
     } catch (err) {
       console.err(err.message);
     }
