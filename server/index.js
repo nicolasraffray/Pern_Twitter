@@ -56,9 +56,8 @@ app.post("/post", async (req, res) => {
   try {
     let arr = [];
     arr.push(req.body.post);
-    arr.push(req.body.userid);
     const newPost = await pool.query(
-      "INSERT INTO Posts (Post, UserName) VALUES($1,$2) RETURNING *",
+      "INSERT INTO Posts (Post) VALUES($1) RETURNING *",
       arr
     );
     res.json(newPost.rows);

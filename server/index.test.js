@@ -4,42 +4,34 @@ const pool = require("./test_db");
 
 beforeAll(() => {
   process.env.NODE_ENV = "test";
-  pool.query(
-    "INSERT INTO Posts (Post, UserName) VALUES ('test post', 'user123');"
-  );
 });
 
 afterAll(() => {
-  pool.query("TRUNCATE TABLE Posts;");
+  pool.query("Truncate TABLE Posts;");
 });
 
-describe("GET /post", () => {
-  it("retrieves all the posts", async () => {
+describe("posts", () => {
+  it("POST /post", async () => {
+    await request(app)
+      .post("/post")
+      .send({ post: "test post" })
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body[0].post).toEqual("test post");
+      });
+  });
+
+  it("GET /post", async () => {
     let response = await request(app)
       .get("/post")
       .then((response) => {
         expect(response.statusCode).toBe(200);
-        expect(response.body[0].post).toEqual("test post");
-        expect(response.body[0].username).toEqual("user123");
+        console.log("LOOK HERE", response.body[0].post);
+        expect(response.body.length).toEqual(1);
       });
   });
-});
 
-describe("POST /post", () => {
-  it("has a functioning post route", async () => {
-    await request(app)
-      .post("/post")
-      .send({ username: "usertest", post: "test post" })
-      .then((response) => {
-        expect(response.statusCode).toBe(200);
-        expect(response.body[0].post).toEqual("test post");
-        expect(response.body[0].username).toEqual("usertest");
-      });
-  });
-});
-
-describe("Get /post/:id", () => {
-  it("can get a specific post", async () => {
+  it("Get /post/:id", async () => {
     let id = await request(app)
       .get("/post")
       .then((response) => {
@@ -51,10 +43,8 @@ describe("Get /post/:id", () => {
         expect(response.statusCode).toBe(200);
       });
   });
-});
 
-describe("PUT /post/:id", () => {
-  it("can update a specific post", async () => {
+  it("PUT /post/:id", async () => {
     let id = await request(app)
       .get("/post")
       .then((response) => {
@@ -75,10 +65,8 @@ describe("PUT /post/:id", () => {
         expect(response.body[0].post).toEqual("new test tweet");
       });
   });
-});
 
-describe("DELETE /post/:id", () => {
-  it("can delete a specific post", async () => {
+  it("DELETE /post/:id", async () => {
     let id = await request(app)
       .get("/post")
       .then((response) => {
@@ -100,6 +88,57 @@ describe("DELETE /post/:id", () => {
           username: "usertest",
           post: "test post",
         });
+      });
+  });
+});
+
+describe("Users", () => {
+  beforeAll(() => {
+    // pool.query("DELETE FROM Users WHERE userid > 0;");
+    pool.query(
+      "INSERT INTO Users (email,username,password) VALUES ('email@example.com', 'test', 'password')"
+    );
+  });
+
+  afterAll(() => {
+    pool.query("DELETE FROM Users WHERE userid > 0;");
+  });
+
+  it("GET /user", async () => {
+    let response = await request(app)
+      .get("/user")
+      .then((response) => {
+        console.log(response.body);
+        expect(response.statusCode).toBe(200);
+        expect(response.body[0].email).toEqual("email@example.com");
+        expect(response.body[0].username).toEqual("test");
+      });
+  });
+  it("GET /user/:username", async () => {
+    let id = await request(app)
+      .get("/user")
+      .then((response) => {
+        return response.body[0].username;
+      });
+    const user = await request(app)
+      .get(`/user/${id}`)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        console.log("SPECIFIC USER", response.body);
+      });
+  });
+
+  it("POST /user", async () => {
+    await request(app)
+      .post("/user")
+      .send({
+        email: "test1@example.com",
+        username: "user1",
+        password: "password",
+      })
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body[0].username).toEqual("user1");
       });
   });
 });
