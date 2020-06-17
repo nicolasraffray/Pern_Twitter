@@ -24,6 +24,7 @@ const InputTodo = () => {
       <h1 className="text-center mt-5">Welcome to Twitter Cloned !</h1>
       <form className={classes.AddPost} onSubmit={onSubmitForm}>
         <input
+          className={"form-control"}
           type="text"
           value={post}
           onChange={(e) => setDescription(e.target.value)}
