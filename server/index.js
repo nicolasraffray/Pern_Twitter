@@ -47,14 +47,16 @@ app.put("/post/:id", async (req, res) => {
       [post, id]
     );
     res.json("post was updated");
-  } catch (err) {}
+  } catch (err) {
+    console.err(err);
+  }
 });
 
 app.post("/post", async (req, res) => {
   try {
     let arr = [];
     arr.push(req.body.post);
-    arr.push(req.body.username);
+    arr.push(req.body.userid);
     const newPost = await pool.query(
       "INSERT INTO Posts (Post, UserName) VALUES($1,$2) RETURNING *",
       arr
@@ -72,6 +74,43 @@ app.delete("/post/:id", async (req, res) => {
       id,
     ]);
     res.json("post was deleted");
+  } catch (err) {
+    console.err(err);
+  }
+});
+
+app.get("/user", async (req, res) => {
+  try {
+    const Users = await pool.query("SELECT * FROM Users");
+    res.json(Users.rows);
+  } catch (err) {
+    console.err(err);
+  }
+});
+
+app.get("/user/:username", async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await pool.query("SELECT * FROM Users WHERE Username = $1;", [
+      username,
+    ]);
+    res.json(user.rows);
+  } catch (err) {
+    console.err(err);
+  }
+});
+
+app.post("/user", async (req, res) => {
+  try {
+    let arr = [];
+    arr.push(req.body.email);
+    arr.push(req.body.username);
+    arr.push(req.body.password);
+    const newUser = await pool.query(
+      "INSERT INTO Users (email, username, password) VALUES($1,$2,$3) RETURNING *",
+      arr
+    );
+    res.json(newUser.rows);
   } catch (err) {
     console.err(err);
   }
