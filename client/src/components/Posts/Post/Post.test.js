@@ -3,8 +3,8 @@ import { shallow } from "enzyme";
 import Post from "./Post";
 
 describe("Post", () => {
-  it("should render a <div />", () => {
-    const wrapper = shallow(<Post />);
-    expect(wrapper.find("div").length).toEqual(1);
+  it("should render <div /> 's", () => {
+    const wrapper = shallow(<Post post={{ post: "fake post" }} />);
+    expect(wrapper.find("div").length).toEqual(4);
   });
 });

@@ -5,6 +5,6 @@ import Posts from "./Posts";
 describe("Posts", () => {
   it("should render the Login Component", () => {
     const wrapper = shallow(<Posts />);
-    expect(wrapper.containsMatchingElement(<Fragment />).toEqual(true));
+    expect(wrapper.find("Fragment").length).toEqual(1);
   });
 });
