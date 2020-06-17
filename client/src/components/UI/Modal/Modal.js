@@ -34,7 +34,6 @@ const Modal = ({ post }) => {
         data-toggle="modal"
         data-target={`#id${post.postid}`}
       >
-        {console.log(post.postid)}
         Edit
       </button>
 
