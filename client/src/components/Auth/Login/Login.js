@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Login.module.css";
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -23,7 +23,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <Link to="/tweets">
-          <button className="btn btn-success">Login</button>
+          <button className="btn btn-success" onClick={props.updateAuth}>
+            Login
+          </button>
         </Link>
       </form>
     </div>

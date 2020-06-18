@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./SignUp.module.css";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   return (
     <div className={classes.SignUp}>
-      {/* {/* <input type="text">Username</input> */}
       <form>
         <input
           className={classes.Child}
@@ -33,7 +32,9 @@ const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <Link to="/tweets">
-          <button className="btn btn-success">Sign Up!</button>
+          <button className="btn btn-success" onClick={props.updateAuth}>
+            Sign Up!
+          </button>
         </Link>
       </form>
     </div>
