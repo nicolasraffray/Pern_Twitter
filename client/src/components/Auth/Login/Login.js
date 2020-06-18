@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Login.module.css";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <div className={classes.Login}>
       <form className="d-flex mt-5">
@@ -10,13 +12,15 @@ const Login = () => {
           type="text"
           className={classes.Child}
           placeholder="Username"
-          value=""
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         ></input>
         <input
-          type="passwords"
+          type="password"
           className={classes.Child}
           placeholder="Password"
-          value=""
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
         <Link to="/tweets">
           <button className="btn btn-success">Login</button>
