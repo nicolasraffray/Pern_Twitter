@@ -7,9 +7,28 @@ const SignUp = (props) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const onSubmitForm = async (e) => {
+    console.log("in the submit form");
+    e.preventDefault();
+    try {
+      console.log("trying the fetch", username, email, password);
+      const body = { username: username, email: email, password: password };
+      console.log(body);
+      const response = await fetch("http://localhost:5000/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      props.updateAuth();
+      // window.location = "/tweets";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div className={classes.SignUp}>
-      <form>
+      <form onSubmit={onSubmitForm}>
         <input
           className={classes.Child}
           type="text"
@@ -31,11 +50,7 @@ const SignUp = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <Link to="/tweets">
-          <button className="btn btn-success" onClick={props.updateAuth}>
-            Sign Up!
-          </button>
-        </Link>
+        <button className="btn btn-success">Sign Up!</button>
       </form>
     </div>
   );
