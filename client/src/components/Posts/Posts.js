@@ -31,7 +31,7 @@ const Posts = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <Fragment>

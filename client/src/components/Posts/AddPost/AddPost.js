@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
+import { Redirect } from "react-router-dom";
 import classes from "./AddPost.module.css";
+import Auth from "./../../../context/auth";
 
-const InputTodo = () => {
+const AddPost = () => {
   const [post, setDescription] = useState("");
 
   const onSubmitForm = async (e) => {
@@ -13,8 +15,7 @@ const InputTodo = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-
-      window.location = "/tweets";
+      setDescription("");
     } catch (err) {
       console.error(err.message);
     }
@@ -35,4 +36,4 @@ const InputTodo = () => {
   );
 };
 
-export default InputTodo;
+export default AddPost;

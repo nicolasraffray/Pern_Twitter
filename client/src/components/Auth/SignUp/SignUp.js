@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import classes from "./SignUp.module.css";
+import Auth from "./../../../context/auth";
 
 const SignUp = (props) => {
   const [username, setUsername] = useState("");
@@ -19,7 +20,9 @@ const SignUp = (props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      props.updateAuth();
+      Auth.signIn(() => {
+        props.history.push("/tweets");
+      });
       // window.location = "/tweets";
     } catch (err) {
       console.error(err.message);
