@@ -131,7 +131,8 @@ app.post("/user", async (req, res) => {
     );
     res.json(newUser.rows);
   } catch (err) {
-    console.err(err);
+    console.error(err);
+    res.json("Failed");
   }
 });
 

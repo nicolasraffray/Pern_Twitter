@@ -20,9 +20,13 @@ const SignUp = (props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      Auth.signIn(() => {
-        props.history.push("/tweets");
-      });
+      let valid = await response.json().then((data) => data);
+      if (valid !== "Failed") {
+        Auth.signIn(() => {
+          props.setLoggedIn();
+          props.history.push("/tweets");
+        });
+      }
       // window.location = "/tweets";
     } catch (err) {
       console.error(err.message);

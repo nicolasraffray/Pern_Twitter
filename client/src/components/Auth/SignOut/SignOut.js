@@ -11,11 +11,9 @@ const SignOut = (props) => {
   };
 
   return (
-    <Fragment>
-      <NavLink to="/" onClick={handleClick}>
-        Sign Out
-      </NavLink>
-    </Fragment>
+    <NavLink to="/" onClick={handleClick}>
+      Sign Out
+    </NavLink>
   );
 };
 

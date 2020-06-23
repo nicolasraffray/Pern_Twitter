@@ -8,7 +8,6 @@ import { NavLink } from "react-router-dom";
 const Navigation = (props) => {
   return (
     <div className={classes.Navigation}>
-      {console.log(Auth.isAuthenticated())}
       <NavLink to="/tweets">Twitter</NavLink>
       <NavLink to="/login">Login</NavLink>
       {props.auth ? <SignOut /> : <NavLink to="/signup">Sign Up</NavLink>}

@@ -28,7 +28,12 @@ const App = (props) => {
               path="/login"
               render={(props) => <Login {...props} setLoggedIn={setLoggedIn} />}
             />
-            <Route path="/signup" component={SignUp} />
+            <Route
+              path="/signup"
+              render={(props) => (
+                <SignUp {...props} setLoggedIn={setLoggedIn} />
+              )}
+            />
             <Route path="/" component={PrimaryPage} exact />
             <PrivateRoute exact path="/tweets" component={Posts} />
           </Switch>
