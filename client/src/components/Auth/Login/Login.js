@@ -54,7 +54,7 @@ const Login = (props) => {
           Login
         </button>
       </form>
-      <Notice show={notice} />
+      <Notice show={notice} component={"login"} />
     </div>
   );
 };

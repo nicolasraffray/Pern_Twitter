@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import classes from "./SignUp.module.css";
 import Auth from "./../../../context/auth";
+import Notice from "./../../Auth/Notice/Notice";
 
 const SignUp = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [notice, setNotice] = useState(false);
 
   const onSubmitForm = async (e) => {
     console.log("in the submit form");
@@ -26,6 +28,8 @@ const SignUp = (props) => {
           props.setLoggedIn();
           props.history.push("/tweets");
         });
+      } else {
+        setNotice(true);
       }
       // window.location = "/tweets";
     } catch (err) {
@@ -62,6 +66,7 @@ const SignUp = (props) => {
         ></input>
         <button className="btn btn-success">Sign Up!</button>
       </form>
+      <Notice show={notice} component={"signup"} />
     </div>
   );
 };
