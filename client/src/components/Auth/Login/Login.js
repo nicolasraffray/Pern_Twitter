@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Login.module.css";
 import Auth from "./../../../context/auth";
+import Notice from "./../Notice/Notice";
 
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [notice, setNotice] = useState(false);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -17,10 +19,14 @@ const Login = (props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      if (response.status === 200) {
+      let valid = await response.json().then((data) => data);
+      console.log(valid);
+      if (valid === true) {
         Auth.signIn(() => {
           props.history.push("/tweets");
         });
+      } else {
+        setNotice(true);
       }
     } catch (err) {
       console.error(err.message);
@@ -48,6 +54,7 @@ const Login = (props) => {
           Login
         </button>
       </form>
+      <Notice show={notice} />
     </div>
   );
 };
