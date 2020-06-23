@@ -37,6 +37,7 @@ const SignUp = (props) => {
           type="text"
           placeholder="Username"
           value={username}
+          required
           onChange={(e) => setUsername(e.target.value)}
         ></input>
         <input
@@ -44,6 +45,7 @@ const SignUp = (props) => {
           type="text"
           placeholder="Email"
           value={email}
+          required
           onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
@@ -51,6 +53,7 @@ const SignUp = (props) => {
           type="password"
           placeholder="Password"
           value={password}
+          required
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <button className="btn btn-success">Sign Up!</button>

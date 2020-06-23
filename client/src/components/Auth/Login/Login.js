@@ -1,13 +1,35 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Login.module.css";
+import Auth from "./../../../context/auth";
 
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { username: username, password: password };
+      console.log(body);
+      const response = await fetch(`http://localhost:5000/user/${username}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (response.status === 200) {
+        Auth.signIn(() => {
+          props.history.push("/tweets");
+        });
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div className={classes.Login}>
-      <form className="d-flex mt-5">
+      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
         <input
           type="text"
           className={classes.Child}
@@ -22,11 +44,9 @@ const Login = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <Link to="/tweets">
-          <button className="btn btn-success" onClick={props.updateAuth}>
-            Login
-          </button>
-        </Link>
+        <button className="btn btn-success" onClick={props.updateAuth}>
+          Login
+        </button>
       </form>
     </div>
   );

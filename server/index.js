@@ -99,6 +99,20 @@ app.get("/user/:username", async (req, res) => {
   }
 });
 
+app.post("/user/:username", async (req, res) => {
+  try {
+    const user = await pool.query("SELECT * FROM Users WHERE Username = $1;", [
+      req.body.username,
+    ]);
+    let auth = user.rows[0].password === req.body.password;
+    if (auth) {
+      res.json(auth);
+    }
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.post("/user", async (req, res) => {
   try {
     let arr = [];
