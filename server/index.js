@@ -104,7 +104,6 @@ app.post("/user/:username", async (req, res) => {
     const user = await pool.query("SELECT * FROM Users WHERE Username = $1;", [
       req.body.username,
     ]);
-    console.log(user.rows[0]);
     if (user.rows[0]) {
       let auth = user.rows[0].password === req.body.password;
       if (auth) {
@@ -113,7 +112,6 @@ app.post("/user/:username", async (req, res) => {
         res.json("Failed");
       }
     } else {
-      console.log("sent");
       res.json("Failed");
     }
   } catch (err) {
