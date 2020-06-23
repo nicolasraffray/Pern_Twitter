@@ -20,9 +20,9 @@ const Login = (props) => {
         body: JSON.stringify(body),
       });
       let valid = await response.json().then((data) => data);
-      console.log(valid);
       if (valid === true) {
         Auth.signIn(() => {
+          props.setLoggedIn();
           props.history.push("/tweets");
         });
       } else {

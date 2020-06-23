@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Navigation.module.css";
+import SignOut from "./../../Auth/SignOut/SignOut";
+import Auth from "./../../../context/auth";
 
 import { NavLink } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (props) => {
   return (
     <div className={classes.Navigation}>
+      {console.log(Auth.isAuthenticated())}
       <NavLink to="/tweets">Twitter</NavLink>
       <NavLink to="/login">Login</NavLink>
-      <NavLink to="/signup">Sign Up</NavLink>
+      {props.auth ? <SignOut /> : <NavLink to="/signup">Sign Up</NavLink>}
     </div>
   );
 };

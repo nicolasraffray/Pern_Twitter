@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 import Login from "./components/Auth/Login/Login";
 import Posts from "./components/Posts/Posts";
 import Navigation from "./components/UI/Navigation/Navigation";
@@ -7,18 +7,27 @@ import "./App.css";
 import SignUp from "./components/Auth/SignUp/SignUp";
 import PrimaryPage from "./components/Auth/PrimaryPage/PrimaryPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import { AuthContext } from "./context/auth";
+import Auth from "./context/auth";
 import { BrowserRouter } from "react-router-dom";
 
-class App extends Component {
-  isAuthenticated = () => {
+const App = (props) => {
+  const [loggedIn, setLoggedIn] = useState(Auth.isAuthenticated());
+
+  useEffect(() => {
+    setLoggedIn(Auth.isAuthenticated());
+  }, [Auth.isAuthenticated()]);
+
+  const isAuthenticated = () => {
     return (
       <Fragment>
+        {console.log(loggedIn)}
         <BrowserRouter>
-          <Navigation />
-
+          <Navigation auth={loggedIn} />
           <Switch>
-            <Route path="/login" component={Login} />
+            <Route
+              path="/login"
+              render={(props) => <Login {...props} setLoggedIn={setLoggedIn} />}
+            />
             <Route path="/signup" component={SignUp} />
             <Route path="/" component={PrimaryPage} exact />
             <PrivateRoute exact path="/tweets" component={Posts} />
@@ -28,10 +37,8 @@ class App extends Component {
     );
   };
 
-  render() {
-    return this.isAuthenticated();
-  }
-}
+  return isAuthenticated();
+};
 
 export default App;
 
