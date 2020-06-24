@@ -8,7 +8,6 @@ if (process.env.NODE_ENV === "test") {
 } else {
   pool = require("./db");
 }
-// const pool = require("./test_db");
 
 const app = express();
 
@@ -54,11 +53,12 @@ app.put("/post/:id", async (req, res) => {
 
 app.post("/post", async (req, res) => {
   try {
-    let arr = [];
-    arr.push(req.body.post);
+    let userId = req.body.userId;
+    let post = req.body.post;
+
     const newPost = await pool.query(
-      "INSERT INTO Posts (Post) VALUES($1) RETURNING *",
-      arr
+      "INSERT INTO Posts (Post,userId) VALUES($1,$2) RETURNING *",
+      [post, userId]
     );
     res.json(newPost.rows);
   } catch (err) {
@@ -107,7 +107,7 @@ app.post("/user/:username", async (req, res) => {
     if (user.rows[0]) {
       let auth = user.rows[0].password === req.body.password;
       if (auth) {
-        res.json(auth);
+        res.json(user.rows[0].userid);
       } else {
         res.json("Failed");
       }

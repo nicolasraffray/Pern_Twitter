@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import Posts from "./../Posts/Posts";
 import AddPost from "./../Posts/AddPost/AddPost";
 
-const HomePage = () => {
+const HomePage = (props) => {
   const [users, setUsers] = useState(null);
   const [rerender, setRerender] = useState(false);
 
@@ -23,7 +23,7 @@ const HomePage = () => {
 
   return (
     <Fragment>
-      <AddPost setRerender={setRerender} />
+      <AddPost setRerender={setRerender} userId={props.userId} />
       {users && (
         <Posts users={users} setRerender={setRerender} render={rerender} />
       )}

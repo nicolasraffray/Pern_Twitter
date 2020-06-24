@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const App = (props) => {
   const [loggedIn, setLoggedIn] = useState(Auth.isAuthenticated());
-  const [mainUser, setUser] = useState("");
+  const [userId, setUser] = useState("");
 
   useEffect(() => {
     setLoggedIn(Auth.isAuthenticated());
@@ -42,7 +42,11 @@ const App = (props) => {
               )}
             />
             <Route path="/" component={PrimaryPage} exact />
-            <PrivateRoute exact path="/tweets" component={HomePage} />
+            <PrivateRoute
+              exact
+              path="/tweets"
+              component={(props) => <HomePage {...props} userId={userId} />}
+            />
           </Switch>
         </BrowserRouter>
       </Fragment>

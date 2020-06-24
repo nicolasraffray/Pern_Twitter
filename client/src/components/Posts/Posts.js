@@ -33,7 +33,7 @@ const Posts = (props) => {
 
   return (
     <Fragment>
-      {console.log(tweets)}
+      {console.log(props.users)}
       {tweets.reverse().map((post) => {
         return (
           <div className={classes.PostContainer} key={post.postid}>

@@ -10,7 +10,7 @@ const AddPost = (props) => {
     e.preventDefault();
     console.log(post);
     try {
-      const body = { post };
+      const body = { post: post, userId: props.userId };
       const response = await fetch("http://localhost:5000/post", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -31,6 +31,7 @@ const AddPost = (props) => {
           className={"form-control"}
           type="text"
           value={post}
+          required
           onChange={(e) => setDescription(e.target.value)}
         />
         <button className="btn btn-success"> Tweet </button>

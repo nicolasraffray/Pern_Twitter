@@ -20,10 +20,11 @@ const Login = (props) => {
         body: JSON.stringify(body),
       });
       let valid = await response.json().then((data) => data);
-      console.log(valid);
-      if (valid === true) {
+      console.log(typeof valid);
+      if (typeof valid === "number") {
         Auth.signIn(() => {
           props.setLoggedIn();
+          props.setUser(valid);
           props.history.push("/tweets");
         });
       } else {
