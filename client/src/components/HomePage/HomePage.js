@@ -11,7 +11,6 @@ const HomePage = (props) => {
       const response = await fetch("http://localhost:5000/user");
       const jsonUser = await response.json();
       setUsers(jsonUser);
-      console.log(users);
     } catch (error) {
       console.error(error);
     }

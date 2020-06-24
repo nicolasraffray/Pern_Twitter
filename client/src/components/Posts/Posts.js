@@ -33,12 +33,11 @@ const Posts = (props) => {
 
   return (
     <Fragment>
-      {console.log(tweets)}
-      {console.log(props.users)}
       {tweets.reverse().map((post) => {
         return (
           <div className={classes.PostContainer} key={post.postid}>
             <div className="card-header">
+              {console.log(props.users)}
               {
                 props.users.filter(
                   (userObj) => userObj.userid === post.userid

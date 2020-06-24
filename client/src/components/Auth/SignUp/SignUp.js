@@ -14,17 +14,17 @@ const SignUp = (props) => {
     console.log("in the submit form");
     e.preventDefault();
     try {
-      console.log("trying the fetch", username, email, password);
       const body = { username: username, email: email, password: password };
-      console.log(body);
       const response = await fetch("http://localhost:5000/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
       let valid = await response.json().then((data) => data);
+      console.log(valid);
       if (valid !== "Failed") {
         Auth.signIn(() => {
+          props.setUser(valid[0].userid);
           props.setLoggedIn();
           props.history.push("/tweets");
         });
