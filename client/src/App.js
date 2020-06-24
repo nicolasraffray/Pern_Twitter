@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useState, useEffect } from "react";
 import Login from "./components/Auth/Login/Login";
-import Posts from "./components/Posts/Posts";
+import HomePage from "./components/HomePage/HomePage";
 import Navigation from "./components/UI/Navigation/Navigation";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -12,6 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const App = (props) => {
   const [loggedIn, setLoggedIn] = useState(Auth.isAuthenticated());
+  const [mainUser, setUser] = useState("");
 
   useEffect(() => {
     setLoggedIn(Auth.isAuthenticated());
@@ -26,16 +27,22 @@ const App = (props) => {
           <Switch>
             <Route
               path="/login"
-              render={(props) => <Login {...props} setLoggedIn={setLoggedIn} />}
+              render={(props) => (
+                <Login {...props} setLoggedIn={setLoggedIn} setUser={setUser} />
+              )}
             />
             <Route
               path="/signup"
               render={(props) => (
-                <SignUp {...props} setLoggedIn={setLoggedIn} />
+                <SignUp
+                  {...props}
+                  setLoggedIn={setLoggedIn}
+                  setUser={setUser}
+                />
               )}
             />
             <Route path="/" component={PrimaryPage} exact />
-            <PrivateRoute exact path="/tweets" component={Posts} />
+            <PrivateRoute exact path="/tweets" component={HomePage} />
           </Switch>
         </BrowserRouter>
       </Fragment>

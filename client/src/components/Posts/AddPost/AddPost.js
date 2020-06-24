@@ -3,11 +3,12 @@ import { Redirect } from "react-router-dom";
 import classes from "./AddPost.module.css";
 import Auth from "./../../../context/auth";
 
-const AddPost = () => {
+const AddPost = (props) => {
   const [post, setDescription] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    console.log(post);
     try {
       const body = { post };
       const response = await fetch("http://localhost:5000/post", {
@@ -16,10 +17,12 @@ const AddPost = () => {
         body: JSON.stringify(body),
       });
       setDescription("");
+      props.setRerender(true);
     } catch (err) {
       console.error(err.message);
     }
   };
+
   return (
     <Fragment>
       <h1 className="text-center mt-5">Welcome to Twitter Cloned !</h1>
