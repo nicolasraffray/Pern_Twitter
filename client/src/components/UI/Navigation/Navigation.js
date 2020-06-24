@@ -9,7 +9,7 @@ const Navigation = (props) => {
   return (
     <div className={classes.Navigation}>
       <NavLink to="/tweets">Twitter</NavLink>
-      <NavLink to="/login">Login</NavLink>
+      {props.auth ? null : <NavLink to="/login">Login</NavLink>}
       {props.auth ? <SignOut /> : <NavLink to="/signup">Sign Up</NavLink>}
     </div>
   );
