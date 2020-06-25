@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import classes from "./Post/Post.module.css";
 import Modal from "../UI/Modal/Modal";
+import Alert from "../UI/Alert/Alert"
 
 const Posts = (props) => {
   const [tweets, setPosts] = useState([]);
@@ -33,6 +34,13 @@ const Posts = (props) => {
 
   };
 
+  const ModalHandler = (userid) => {
+    if(props.userId === userid){
+      setAlert(true)
+    }
+
+  }
+
   useEffect(() => {
     getPosts();
   }, [props.render]);
@@ -57,8 +65,11 @@ const Posts = (props) => {
               >
                 Delete
               </button>
-              <Modal post={post} key={post.postid} userid={props.userId}/>
+              <Modal post={post} key={post.postid} userid={props.userId} setRerender={props.setRerender}  />
+              <Alert show={alert} setShow={setAlert}/> 
             </div>
+
+
           </div>
         );
       })}
