@@ -24,7 +24,7 @@ const HomePage = (props) => {
     <Fragment>
       <AddPost setRerender={setRerender} userId={props.userId} />
       {users && (
-        <Posts users={users} setRerender={setRerender} render={rerender} />
+        <Posts users={users} setRerender={setRerender} render={rerender} userId={props.userId} />
       )}
     </Fragment>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Navigation.module.css";
 import SignOut from "./../../Auth/SignOut/SignOut";
-import Auth from "./../../../context/auth";
+// import Auth from "./../../../context/auth";
 
 import { NavLink } from "react-router-dom";
 

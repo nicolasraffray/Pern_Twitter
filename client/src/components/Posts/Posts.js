@@ -4,6 +4,7 @@ import Modal from "../UI/Modal/Modal";
 
 const Posts = (props) => {
   const [tweets, setPosts] = useState([]);
+  const [alert, setAlert] = useState(false)
 
   const getPosts = async () => {
     try {
@@ -16,7 +17,8 @@ const Posts = (props) => {
     }
   };
 
-  const deletePost = async (id) => {
+  const deletePost = async (id, userid) => {
+    if(props.userId === userid){
     try {
       const deletePost = await fetch(`http://localhost:5000/post/${id}`, {
         method: "DELETE",
@@ -25,6 +27,10 @@ const Posts = (props) => {
     } catch (err) {
       console.error(err.message);
     }
+  } else {
+    setAlert(true)
+  }
+
   };
 
   useEffect(() => {
@@ -33,11 +39,12 @@ const Posts = (props) => {
 
   return (
     <Fragment>
+    {console.log(tweets)}
+    {console.log(props.users)}
       {tweets.reverse().map((post) => {
         return (
           <div className={classes.PostContainer} key={post.postid}>
             <div className="card-header">
-              {console.log(props.users)}
               {
                 props.users.filter(
                   (userObj) => userObj.userid === post.userid
@@ -48,7 +55,7 @@ const Posts = (props) => {
             <div className="card-footer">
               <button
                 className="btn btn-danger"
-                onClick={() => deletePost(post.postid)}
+                onClick={() => deletePost(post.postid, post.userid)}
               >
                 Delete
               </button>
