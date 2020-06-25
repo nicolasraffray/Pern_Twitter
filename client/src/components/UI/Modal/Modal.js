@@ -1,15 +1,12 @@
 import React, { Fragment, useState } from "react";
 
-const Modal = ({ post }) => {
+const Modal = ({ post }, props) => {
   const [description, setPost] = useState(post.post);
 
   const updateDescription = async (e) => {
     e.preventDefault();
-    console.log("in update description", e);
     try {
-      console.log(description);
       const body = { post: description };
-
       const response = await fetch(
         `http://localhost:5000/post/${post.postid}`,
         {
@@ -30,7 +27,7 @@ const Modal = ({ post }) => {
       <button
         type="button"
         className="btn btn-warning"
-        data-toggle="modal"
+        data-toggle={props.userid === post.userid ? "modal" : null}
         data-target={`#id${post.postid}`}
       >
         Edit

@@ -39,8 +39,6 @@ const Posts = (props) => {
 
   return (
     <Fragment>
-    {console.log(tweets)}
-    {console.log(props.users)}
       {tweets.reverse().map((post) => {
         return (
           <div className={classes.PostContainer} key={post.postid}>
@@ -59,7 +57,7 @@ const Posts = (props) => {
               >
                 Delete
               </button>
-              <Modal post={post} key={post.postid} />
+              <Modal post={post} key={post.postid} userid={props.userId}/>
             </div>
           </div>
         );
