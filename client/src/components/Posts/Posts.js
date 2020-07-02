@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
-import classes from "./Post/Post.module.css";
+import classes from "./Posts.module.css";
 import Modal from "../UI/Modal/Modal";
-import Alert from "../UI/Alert/Alert"
+import Alert from "../UI/Alert/Alert";
 
 const Posts = (props) => {
   const [tweets, setPosts] = useState([]);
-  const [alert, setAlert] = useState(false)
+  const [alert, setAlert] = useState(false);
 
   const getPosts = async () => {
     try {
@@ -19,27 +19,40 @@ const Posts = (props) => {
   };
 
   const deletePost = async (id, userid) => {
-    if(props.userId === userid){
-    try {
-      const deletePost = await fetch(`http://localhost:5000/post/${id}`, {
-        method: "DELETE",
-      });
-      setPosts(tweets.filter((post) => post.postid !== id));
-    } catch (err) {
-      console.error(err.message);
+    if (props.userId === userid) {
+      try {
+        const deletePost = await fetch(`http://localhost:5000/post/${id}`, {
+          method: "DELETE",
+        });
+        setPosts(tweets.filter((post) => post.postid !== id));
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      setAlert(true);
     }
-  } else {
-    setAlert(true)
-  }
-
   };
 
-  const ModalHandler = (userid) => {
-    if(props.userId === userid){
-      setAlert(true)
+  const cardFotter = (post, user_id) => {
+    if (user_id === props.userId) {
+      return (
+        <div className="card-footer">
+          <button
+            className="btn btn-danger m-2"
+            onClick={() => deletePost(post.postid, post.userid)}
+          >
+            Delete
+          </button>
+          <Modal
+            post={post}
+            key={post.postid}
+            userid={props.userId}
+            setRerender={props.setRerender}
+          />
+        </div>
+      );
     }
-
-  }
+  };
 
   useEffect(() => {
     getPosts();
@@ -47,32 +60,23 @@ const Posts = (props) => {
 
   return (
     <Fragment>
-      {tweets.reverse().map((post) => {
-        return (
-          <div className={classes.PostContainer} key={post.postid}>
-            <div className="card-header">
-              {
-                props.users.filter(
-                  (userObj) => userObj.userid === post.userid
-                )[0].username
-              }
+      <div className={classes.Container}>
+        {tweets.reverse().map((post) => {
+          return (
+            <div className={classes.PostContainer} key={post.postid}>
+              <div className="card-header">
+                {
+                  props.users.filter(
+                    (userObj) => userObj.userid === post.userid
+                  )[0].username
+                }
+              </div>
+              <div className="card-body">{post.post}</div>
+              {cardFotter(post, post.userid)}
             </div>
-            <div className="card-body">{post.post}</div>
-            <div className="card-footer">
-              <button
-                className="btn btn-danger"
-                onClick={() => deletePost(post.postid, post.userid)}
-              >
-                Delete
-              </button>
-              <Modal post={post} key={post.postid} userid={props.userId} setRerender={props.setRerender}  />
-              <Alert show={alert} setShow={setAlert}/> 
-            </div>
-
-
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </Fragment>
   );
 };

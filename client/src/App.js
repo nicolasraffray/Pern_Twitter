@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const App = (props) => {
   const [loggedIn, setLoggedIn] = useState(Auth.isAuthenticated());
-  const [userId, setUser] = useState("");
+  const [userId, setUser] = useState();
 
   useEffect(() => {
     setLoggedIn(Auth.isAuthenticated());
