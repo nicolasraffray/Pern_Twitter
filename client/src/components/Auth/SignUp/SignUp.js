@@ -43,7 +43,7 @@ const SignUp = (props) => {
         <input
           className={classes.Child}
           type="text"
-          placeholder="Username"
+          placeholder="Twitter Username"
           value={username}
           required
           onChange={(e) => setUsername(e.target.value)}
@@ -51,7 +51,7 @@ const SignUp = (props) => {
         <input
           className={classes.Child}
           type="text"
-          placeholder="Email"
+          placeholder="Enter your Email"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
@@ -59,7 +59,7 @@ const SignUp = (props) => {
         <input
           className={classes.Child}
           type="password"
-          placeholder="Password"
+          placeholder="Enter a Password"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
