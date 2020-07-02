@@ -12,6 +12,10 @@
   left: 20px;
 }
 
+.LoginLogout {
+  float: right;
+}
+
 /* Style the links inside the navigation bar */
 .Navigation a {
   float: left;

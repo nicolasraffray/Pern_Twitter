@@ -12,8 +12,10 @@ const Navigation = (props) => {
         height="30"
       />
       <NavLink to="/tweets">Twitter</NavLink>
-      {props.auth ? null : <NavLink to="/login">Login</NavLink>}
-      {props.auth ? <SignOut /> : <NavLink to="/signup">Sign Up</NavLink>}
+      <div className={classes.LoginLogout}>
+        {props.auth ? null : <NavLink to="/login">Login</NavLink>}
+        {props.auth ? <SignOut /> : <NavLink to="/signup">Sign Up</NavLink>}
+      </div>
     </div>
   );
 };
