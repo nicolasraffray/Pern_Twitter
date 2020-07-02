@@ -1,7 +1,15 @@
 /* Add a black background color to the top navigation */
 .Navigation {
-  background-color: rgb(141, 141, 141);
+  background-color: rgb(40, 89, 122);
   overflow: hidden;
+  position: relative;
+  padding-left: 65px;
+}
+
+.Navigation img {
+  position: absolute;
+  top: 12.5px;
+  left: 20px;
 }
 
 /* Style the links inside the navigation bar */
