@@ -25,17 +25,27 @@ const AddPost = (props) => {
 
   return (
     <Fragment>
-      <h1 className="text-center mt-5">Welcome to Twitter Cloned !</h1>
-      <form className={classes.AddPost} onSubmit={onSubmitForm}>
-        <input
-          className={"form-control"}
-          type="text"
-          value={post}
-          required
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <button className="btn btn-success"> Tweet </button>
-      </form>
+      <div className={classes.AddPost}>
+        <img
+          src="https://cdn.mos.cms.futurecdn.net/5d4c1670c1ededc5c9f499441faf67a5.jpg"
+          width="25%"
+          height="10%"
+        ></img>
+        <div className={classes.InnerDiv}>
+          <center>
+            <form onSubmit={onSubmitForm}>
+              <input
+                className={"form-control"}
+                type="text"
+                value={post}
+                required
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <button className="btn btn-success"> Tweet </button>
+            </form>
+          </center>
+        </div>
+      </div>
     </Fragment>
   );
 };

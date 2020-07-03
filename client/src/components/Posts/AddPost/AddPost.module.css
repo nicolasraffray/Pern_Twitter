@@ -14,20 +14,20 @@
 .InnerDiv {
   display: flex;
   flex-direction: row-reverse;
-  background-color: pink;
   justify-content: center;
   width: 100%;
 }
 
 .InnerDiv form {
-  margin: 0px;
+  margin-top: 2.5%;
   width: 100%;
 }
 
 .InnerDiv input {
-  width: 200px;
+  width: 500px;
 }
 
 .InnerDiv button {
   width: 90px;
+  margin-top: 2.5%;
 }
