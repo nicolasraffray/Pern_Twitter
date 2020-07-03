@@ -1,3 +1,33 @@
-.AddPost form input {
-  padding: 10px;
+.AddPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2.5%;
+}
+
+.AddPost img {
+  /* padding-left: 15%; */
+  left: 40%;
+  position: relative;
+}
+
+.InnerDiv {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: pink;
+  justify-content: center;
+  width: 100%;
+}
+
+.InnerDiv form {
+  margin: 0px;
+  width: 100%;
+}
+
+.InnerDiv input {
+  width: 200px;
+}
+
+.InnerDiv button {
+  width: 90px;
 }
