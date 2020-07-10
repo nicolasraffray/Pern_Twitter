@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { shallow } from "enzyme";
 import App from "./App";
 
 describe("App", () => {
   it("should render a <div />", () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find("div").length).toEqual(1);
+    expect(wrapper.find("Fragment").length).toEqual(1);
   });
 
   // it("should render the Login Component", () => {
